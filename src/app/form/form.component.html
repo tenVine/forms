@@ -1,0 +1,79 @@
+<form #mainForm="ngForm" (ngSubmit)="onSubmit(mainForm.value)" class="main-form" [mustMatch]="['password', 'confirmPassword']">
+    <div class="form-item">
+        <mat-form-field>
+        <input 
+            type="email"
+            matInput
+            [(ngModel)]="user.email"
+            #email="ngModel"
+            name="email"
+            email
+            placeholder="Email"
+            required>
+        <mat-error *ngIf="email.invalid && email.touched && email.errors.required">Email required</mat-error>
+        <mat-error *ngIf="email.invalid && email.touched && email.errors.email">Email must be a valid email address</mat-error>
+    </mat-form-field>
+    </div>
+    <div class="form-item">
+        <mat-form-field>
+            <mat-label>Select</mat-label>
+            <select 
+                matNativeControl  
+                name="selectForm"
+                [(ngModel)]="user.selectForm">
+                <option value="stable">Stable</option>
+                <option value="critical">Critical</option>
+                <option value="finished">Finished</option>
+            </select>
+        </mat-form-field>
+    </div>
+    <div class="form-item">
+        <mat-radio-group
+            name="genderRadio"
+            [(ngModel)]="user.genderRadio">
+            <mat-radio-button value="male" checked>male</mat-radio-button>
+            <mat-radio-button value="female">female</mat-radio-button>
+        </mat-radio-group> 
+    </div>
+    <div class="form-item">
+        <mat-form-field>
+            <input 
+                type="password"
+                matInput
+                [(ngModel)]="user.password"
+                #password="ngModel"
+                name="password"
+                password
+                placeholder="Password"
+                minlength="6"
+                required>
+            <mat-error *ngIf="password.invalid && password.touched && password.errors.required">Password required</mat-error>
+            <mat-error *ngIf="password.invalid && password.touched && password.errors.minlength">Password min-leght 6</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input 
+                type="password"
+                matInput
+                [(ngModel)]="user.confirmPassword"
+                #confirmPassword="ngModel"
+                name="confirmPassword"
+                confirmPassword
+                placeholder="Confirm password"
+                required>
+            <mat-error *ngIf="confirmPassword.invalid && confirmPassword.touched && confirmPassword.errors.required">Password required</mat-error>
+            <mat-error *ngIf="confirmPassword.invalid && confirmPassword.touched && confirmPassword.errors.mustMatch">Passwords must match</mat-error>
+        </mat-form-field>
+    </div>
+    <button 
+        type="submit"
+        [disabled]="mainForm.invalid">Submit</button>
+</form>
+
+<div class="form-data" *ngIf="submitted">
+    <h3>Data:</h3>
+    <p>User email: {{ userData.email }}</p>
+    <p>User select: {{ userData.selectForm }}</p>
+    <p>Gender: {{ userData.genderRadio }}</p>
+    <p>Password: {{ userData.password }}</p>
+    <p>Confirm Password: {{ userData.confirmPassword }}</p>
+</div>
