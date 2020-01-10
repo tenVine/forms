@@ -11,8 +11,11 @@ import {FormControl, Validators} from '@angular/forms';
 export class FormComponent implements OnInit {
   @ViewChild('mainForm', { static: false }) form: NgForm;
   user = {
+    email: '',
     selectForm: 'stable',
-    genderRadio: 'male'
+    genderRadio: 'male',
+    password: '',
+    confirmPassword: ''
   };
   userData = {
     email: '',
@@ -21,10 +24,6 @@ export class FormComponent implements OnInit {
     password: '',
     confirmPassword: ''
   };
-  defaultQuestion = 'stable';
-  genders = ['male', 'female'];
-  genderRadio: string;
-  valueForm: string;
   submitted = false;
   constructor() { }
 
@@ -38,7 +37,7 @@ export class FormComponent implements OnInit {
     this.userData.genderRadio = this.form.value.genderRadio;
     this.userData.password = this.form.value.password;
     this.userData.confirmPassword = this.form.value.confirmPassword;
-
+    
     this.form.reset();
   }
 }
